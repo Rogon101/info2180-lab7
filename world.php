@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
             echo "No Such Country";
         }
     
-
+    }else if (isset($_GET['all']) && !empty($_GET['all']) && $_GET['all'] == "true"){
         $stmt = $conn->query("SELECT * FROM countries");
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,6 +32,6 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         }
         echo '</ul>';
     }else{
-         echo 'use get request :p';
+         echo 'use get request';
     }
 }

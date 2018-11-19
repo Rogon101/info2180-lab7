@@ -1,10 +1,10 @@
 /*global $*/
 window.onload = main;
 
- //accepts a country and requests data
-function ajax_request(country){
+ //accepts a requests 
+function ajax_request(request){
     let requestObject = new XMLHttpRequest();
-    let url = "/world.php?country="+country;
+    let url = "/world.php?"+request;
     
     requestObject.onreadystatechange=function(){
         if(this.readyState == XMLHttpRequest.DONE){
@@ -20,10 +20,15 @@ function ajax_request(country){
     requestObject.send();
 }
 
- function main(){
+function main(){
     var lookup = document.getElementById("lookup");
+    $("#country").after("<label for='all'>Select all countries</label><input type='checkbox' name='all' id='all'/>");
     lookup.onclick = function(){
-        ajax_request(document.getElementById("country").value.trim());
-        
+    
+        if($("#all")[0].checked){
+            ajax_request("all=true");
+        }else{
+            ajax_request("country="+document.getElementById("country").value.trim());
+        } 
     }
 }
